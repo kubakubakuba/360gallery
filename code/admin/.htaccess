@@ -1,0 +1,10 @@
+AuthType Basic
+AuthName "Pro přístup do administrátorské konzole se prosím přihlašte!"
+AuthUserFile path/to/folder/admin/.htpasswd
+Require valid-user 
+
+Header set X-Frame-Options ALLOW
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
